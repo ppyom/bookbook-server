@@ -41,3 +41,5 @@ app.get((req, res) => {
 });
 
 app.listen(parseInt(process.env.PORT));
+
+module.exports = app;
