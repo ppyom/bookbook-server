@@ -12,9 +12,10 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-// Error Handling
-app.use((error, req, res, next) => {
-  res.status(500).send({ message: '서버의.. 오류..😭', error });
+app.get('/', (req, res, next) => {
+  res.send({
+    github: 'https://github.com/ppyom/bookbook-server',
+  });
 });
 
 // Routes
@@ -36,8 +37,12 @@ app.get('/item/:id', async (req, res, next) => {
 });
 
 // Not Found
-app.get((req, res) => {
+app.use((req, res, next) => {
   res.status(404).send({ error: '올바르지 않은 경로입니다.' });
+});
+
+app.use((error, req, res, next) => {
+  res.status(500).send({ message: error.message });
 });
 
 app.listen(parseInt(process.env.PORT));
