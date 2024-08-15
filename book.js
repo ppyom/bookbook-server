@@ -4,7 +4,6 @@ const maxResults = 8;
 
 const getItemList = async (type = 'ItemNewAll', page, sort) => {
   const url = createURL('ItemList.aspx', { page, sort });
-  console.log(url);
   url.searchParams.append('QueryType', type);
   return fetch(url).then((res) => res.json());
 };
@@ -31,6 +30,7 @@ const createURL = (endpoint, { page = 1, sort = 'Accuracy' } = {}) => {
     Start: page,
     MaxResults: maxResults,
     SearchTarget: 'Book',
+    Cover: 'Big',
     Sort: sort,
   });
   return new URL(`${url}?${defaultSearchParams.toString()}`);
